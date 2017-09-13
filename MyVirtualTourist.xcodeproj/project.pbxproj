@@ -14,6 +14,7 @@
 		D86E9C151F696CD600246FD4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D86E9C131F696CD600246FD4 /* LaunchScreen.storyboard */; };
 		D86E9C201F696CD600246FD4 /* MyVirtualTouristTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86E9C1F1F696CD600246FD4 /* MyVirtualTouristTests.swift */; };
 		D86E9C2B1F696CD600246FD4 /* MyVirtualTouristUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86E9C2A1F696CD600246FD4 /* MyVirtualTouristUITests.swift */; };
+		D86E9C3A1F69710E00246FD4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86E9C391F69710E00246FD4 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		D86E9C261F696CD600246FD4 /* MyVirtualTouristUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyVirtualTouristUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D86E9C2A1F696CD600246FD4 /* MyVirtualTouristUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVirtualTouristUITests.swift; sourceTree = "<group>"; };
 		D86E9C2C1F696CD600246FD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D86E9C391F69710E00246FD4 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		D86E9C091F696CD600246FD4 /* MyVirtualTourist */ = {
 			isa = PBXGroup;
 			children = (
+				D86E9C381F6970EA00246FD4 /* Controller */,
 				D86E9C0A1F696CD600246FD4 /* AppDelegate.swift */,
 				D86E9C0C1F696CD600246FD4 /* ViewController.swift */,
 				D86E9C0E1F696CD600246FD4 /* Main.storyboard */,
@@ -123,6 +126,14 @@
 				D86E9C2C1F696CD600246FD4 /* Info.plist */,
 			);
 			path = MyVirtualTouristUITests;
+			sourceTree = "<group>";
+		};
+		D86E9C381F6970EA00246FD4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D86E9C391F69710E00246FD4 /* MapViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D86E9C0D1F696CD600246FD4 /* ViewController.swift in Sources */,
+				D86E9C3A1F69710E00246FD4 /* MapViewController.swift in Sources */,
 				D86E9C0B1F696CD600246FD4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

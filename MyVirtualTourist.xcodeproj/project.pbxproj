@@ -16,6 +16,7 @@
 		D86E9C2B1F696CD600246FD4 /* MyVirtualTouristUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86E9C2A1F696CD600246FD4 /* MyVirtualTouristUITests.swift */; };
 		D86E9C3A1F69710E00246FD4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86E9C391F69710E00246FD4 /* MapViewController.swift */; };
 		D86E9C411F6AA6F400246FD4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D86E9C3F1F6AA6F400246FD4 /* Model.xcdatamodeld */; };
+		D872265D1F6B7BDD00C13025 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D872265C1F6B7BDD00C13025 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		D86E9C2C1F696CD600246FD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D86E9C391F69710E00246FD4 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D86E9C401F6AA6F400246FD4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		D872265C1F6B7BDD00C13025 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				D86E9C3F1F6AA6F400246FD4 /* Model.xcdatamodeld */,
+				D872265C1F6B7BDD00C13025 /* CoreDataStack.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D872265D1F6B7BDD00C13025 /* CoreDataStack.swift in Sources */,
 				D86E9C0D1F696CD600246FD4 /* ViewController.swift in Sources */,
 				D86E9C3A1F69710E00246FD4 /* MapViewController.swift in Sources */,
 				D86E9C0B1F696CD600246FD4 /* AppDelegate.swift in Sources */,

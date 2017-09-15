@@ -20,6 +20,9 @@ class mapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set mapView's delegate
+        mapView.delegate = self
+        
         // Add longPress gesture
         let longPress = UILongPressGestureRecognizer(target:self,
                                                      action:#selector(addAPin(_:)))
@@ -50,6 +53,14 @@ class mapViewController: UIViewController, MKMapViewDelegate {
         
         // Add annotation model on the map
         mapView.addAnnotation(annotation)
+    }
+    
+    // Go to Album Collection
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "AlbumViewController")
+        self.present(controller, animated: true, completion: nil)
+        print ("触发大头针动作")
     }
 }
 

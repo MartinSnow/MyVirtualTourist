@@ -21,6 +21,7 @@
 		D87226631F6B7CDA00C13025 /* Album+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D872265F1F6B7CDA00C13025 /* Album+CoreDataProperties.swift */; };
 		D87226641F6B7CDA00C13025 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87226601F6B7CDA00C13025 /* Location+CoreDataClass.swift */; };
 		D87226651F6B7CDA00C13025 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87226611F6B7CDA00C13025 /* Location+CoreDataProperties.swift */; };
+		D87226671F6B8D1500C13025 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87226661F6B8D1500C13025 /* AlbumViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		D872265F1F6B7CDA00C13025 /* Album+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Album+CoreDataProperties.swift"; path = "../Album+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D87226601F6B7CDA00C13025 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Location+CoreDataClass.swift"; path = "../Location+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D87226611F6B7CDA00C13025 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Location+CoreDataProperties.swift"; path = "../Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D87226661F6B8D1500C13025 /* AlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				D86E9C391F69710E00246FD4 /* MapViewController.swift */,
+				D87226661F6B8D1500C13025 /* AlbumViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				D86E9C0B1F696CD600246FD4 /* AppDelegate.swift in Sources */,
 				D87226641F6B7CDA00C13025 /* Location+CoreDataClass.swift in Sources */,
 				D87226651F6B7CDA00C13025 /* Location+CoreDataProperties.swift in Sources */,
+				D87226671F6B8D1500C13025 /* AlbumViewController.swift in Sources */,
 				D86E9C411F6AA6F400246FD4 /* Model.xcdatamodeld in Sources */,
 				D87226631F6B7CDA00C13025 /* Album+CoreDataProperties.swift in Sources */,
 				D87226621F6B7CDA00C13025 /* Album+CoreDataClass.swift in Sources */,

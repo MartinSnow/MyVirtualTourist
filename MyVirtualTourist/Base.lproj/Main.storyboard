@@ -36,5 +36,83 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--AlbumViewController-->
+        <scene sceneID="aLh-sz-AA9">
+            <objects>
+                <viewController storyboardIdentifier="AlbumViewController" id="Rac-Yn-Y2o" userLabel="AlbumViewController" customClass="albumViewController" customModule="MyVirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gXF-zK-V4j"/>
+                        <viewControllerLayoutGuide type="bottom" id="8sh-rh-gI5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IDT-Rp-cpU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Jfm-Ks-IjF">
+                                <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hyX-yQ-q5o"/>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pib-PP-wJ6">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="450" id="QgB-kS-DAe"/>
+                                        </constraints>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gqk-eb-36x">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="6bF-gD-VJW">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </view>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcJ-n8-FQ1">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="R1F-MI-RTG"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="loadNewPhotos:" destination="Rac-Yn-Y2o" eventType="touchUpInside" id="vst-er-fP0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="zcJ-n8-FQ1" secondAttribute="bottom" id="5r9-5r-giw"/>
+                                    <constraint firstAttribute="trailing" secondItem="zcJ-n8-FQ1" secondAttribute="trailing" id="9uE-di-32d"/>
+                                    <constraint firstItem="pib-PP-wJ6" firstAttribute="top" secondItem="hyX-yQ-q5o" secondAttribute="bottom" id="A1C-D2-CVR"/>
+                                    <constraint firstItem="zcJ-n8-FQ1" firstAttribute="top" secondItem="pib-PP-wJ6" secondAttribute="bottom" id="GsF-bG-fJA"/>
+                                    <constraint firstItem="pib-PP-wJ6" firstAttribute="leading" secondItem="Jfm-Ks-IjF" secondAttribute="leading" id="LSb-D3-yoa"/>
+                                    <constraint firstItem="hyX-yQ-q5o" firstAttribute="leading" secondItem="Jfm-Ks-IjF" secondAttribute="leading" id="RJA-U0-B9y"/>
+                                    <constraint firstItem="hyX-yQ-q5o" firstAttribute="top" secondItem="Jfm-Ks-IjF" secondAttribute="top" id="THY-Lw-e0Y"/>
+                                    <constraint firstAttribute="trailing" secondItem="pib-PP-wJ6" secondAttribute="trailing" id="emm-rM-97v"/>
+                                    <constraint firstItem="zcJ-n8-FQ1" firstAttribute="leading" secondItem="Jfm-Ks-IjF" secondAttribute="leading" id="n6N-mQ-fHk"/>
+                                    <constraint firstAttribute="trailing" secondItem="hyX-yQ-q5o" secondAttribute="trailing" id="ngJ-B4-yEU"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Jfm-Ks-IjF" firstAttribute="leading" secondItem="IDT-Rp-cpU" secondAttribute="leadingMargin" id="ExA-zZ-u13"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Jfm-Ks-IjF" secondAttribute="trailing" id="OcZ-vI-oEV"/>
+                            <constraint firstItem="8sh-rh-gI5" firstAttribute="top" secondItem="Jfm-Ks-IjF" secondAttribute="bottom" id="nqM-bN-Ox4"/>
+                            <constraint firstItem="Jfm-Ks-IjF" firstAttribute="top" secondItem="gXF-zK-V4j" secondAttribute="bottom" id="yK1-uM-TCw"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="albumCollection" destination="pib-PP-wJ6" id="Lc1-tF-ato"/>
+                        <outlet property="mapView" destination="hyX-yQ-q5o" id="FQx-Pm-BkA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xcY-8N-vfa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1238" y="36"/>
+        </scene>
     </scenes>
 </document>

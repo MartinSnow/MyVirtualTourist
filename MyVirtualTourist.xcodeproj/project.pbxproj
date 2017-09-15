@@ -16,6 +16,12 @@
 		D86E9C2B1F696CD600246FD4 /* MyVirtualTouristUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86E9C2A1F696CD600246FD4 /* MyVirtualTouristUITests.swift */; };
 		D86E9C3A1F69710E00246FD4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86E9C391F69710E00246FD4 /* MapViewController.swift */; };
 		D86E9C411F6AA6F400246FD4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D86E9C3F1F6AA6F400246FD4 /* Model.xcdatamodeld */; };
+		D86E9C431F6AAE5C00246FD4 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86E9C421F6AAE5C00246FD4 /* CoreDataStack.swift */; };
+		D86E9C4F1F6ACAE600246FD4 /* CoreDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86E9C4E1F6ACAE600246FD4 /* CoreDataViewController.swift */; };
+		D86E9C541F6AD1CA00246FD4 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86E9C501F6AD1CA00246FD4 /* Location+CoreDataClass.swift */; };
+		D86E9C551F6AD1CA00246FD4 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86E9C511F6AD1CA00246FD4 /* Location+CoreDataProperties.swift */; };
+		D86E9C561F6AD1CA00246FD4 /* Album+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86E9C521F6AD1CA00246FD4 /* Album+CoreDataClass.swift */; };
+		D86E9C571F6AD1CA00246FD4 /* Album+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86E9C531F6AD1CA00246FD4 /* Album+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +57,12 @@
 		D86E9C2C1F696CD600246FD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D86E9C391F69710E00246FD4 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D86E9C401F6AA6F400246FD4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		D86E9C421F6AAE5C00246FD4 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		D86E9C4E1F6ACAE600246FD4 /* CoreDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataViewController.swift; sourceTree = "<group>"; };
+		D86E9C501F6AD1CA00246FD4 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Location+CoreDataClass.swift"; path = "../Location+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D86E9C511F6AD1CA00246FD4 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Location+CoreDataProperties.swift"; path = "../Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D86E9C521F6AD1CA00246FD4 /* Album+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Album+CoreDataClass.swift"; path = "../Album+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D86E9C531F6AD1CA00246FD4 /* Album+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Album+CoreDataProperties.swift"; path = "../Album+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +146,7 @@
 		D86E9C381F6970EA00246FD4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D86E9C4E1F6ACAE600246FD4 /* CoreDataViewController.swift */,
 				D86E9C391F69710E00246FD4 /* MapViewController.swift */,
 			);
 			name = Controller;
@@ -143,6 +156,11 @@
 			isa = PBXGroup;
 			children = (
 				D86E9C3F1F6AA6F400246FD4 /* Model.xcdatamodeld */,
+				D86E9C421F6AAE5C00246FD4 /* CoreDataStack.swift */,
+				D86E9C501F6AD1CA00246FD4 /* Location+CoreDataClass.swift */,
+				D86E9C511F6AD1CA00246FD4 /* Location+CoreDataProperties.swift */,
+				D86E9C521F6AD1CA00246FD4 /* Album+CoreDataClass.swift */,
+				D86E9C531F6AD1CA00246FD4 /* Album+CoreDataProperties.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -284,6 +302,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D86E9C551F6AD1CA00246FD4 /* Location+CoreDataProperties.swift in Sources */,
+				D86E9C541F6AD1CA00246FD4 /* Location+CoreDataClass.swift in Sources */,
+				D86E9C561F6AD1CA00246FD4 /* Album+CoreDataClass.swift in Sources */,
+				D86E9C571F6AD1CA00246FD4 /* Album+CoreDataProperties.swift in Sources */,
+				D86E9C4F1F6ACAE600246FD4 /* CoreDataViewController.swift in Sources */,
+				D86E9C431F6AAE5C00246FD4 /* CoreDataStack.swift in Sources */,
 				D86E9C0D1F696CD600246FD4 /* ViewController.swift in Sources */,
 				D86E9C3A1F69710E00246FD4 /* MapViewController.swift in Sources */,
 				D86E9C0B1F696CD600246FD4 /* AppDelegate.swift in Sources */,

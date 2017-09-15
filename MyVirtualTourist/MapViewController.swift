@@ -8,12 +8,13 @@
 
 import UIKit
 import MapKit
+import CoreData
 
-class mapViewController: UIViewController, MKMapViewDelegate {
+class mapViewController: CoreDataTableViewController, MKMapViewDelegate {
     
     // Mark: Properties
     
-    var coordinate = CLLocationCoordinate2D()
+    var touchCoordinate = CLLocationCoordinate2D()
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -33,24 +34,5 @@ class mapViewController: UIViewController, MKMapViewDelegate {
         if gestureRecognizer.state != .began {
             return
         }
-        
-        // Get the touch point location
-        let touchPoint = gestureRecognizer.location(in: mapView)
-        
-        // Turn the location to coordinate
-        coordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-        
-        // Create an annotation model
-        let annotation = MKPointAnnotation()
-        
-        // Add annotation's properties
-        annotation.coordinate = coordinate
-        annotation.title = "title"
-        annotation.subtitle = "subtitle"
-        
-        // Add annotation model on the map
-        mapView.addAnnotation(annotation)
     }
 }
-
-

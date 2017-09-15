@@ -13,7 +13,7 @@ class mapViewController: UIViewController, MKMapViewDelegate {
     
     // Mark: Properties
     
-    var coordinate = CLLocationCoordinate2D()
+    public var coordinate = CLLocationCoordinate2D()
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -42,9 +42,12 @@ class mapViewController: UIViewController, MKMapViewDelegate {
         
         // Turn the location to coordinate
         coordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+        print("lat is \(coordinate.latitude) and lon is \(coordinate.longitude)")
         
         // Create an annotation model
         let annotation = MKPointAnnotation()
+        Constants.FlickrParameterValues.LatValue = Float(coordinate.latitude)
+        Constants.FlickrParameterValues.LonValue = Float(coordinate.longitude)
         
         // Add annotation's properties
         annotation.coordinate = coordinate
@@ -58,9 +61,9 @@ class mapViewController: UIViewController, MKMapViewDelegate {
     // Go to Album Collection
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
+        getPhotosData()
         let controller = self.storyboard!.instantiateViewController(withIdentifier: "AlbumViewController")
         self.present(controller, animated: true, completion: nil)
-        print ("触发大头针动作")
     }
 }
 

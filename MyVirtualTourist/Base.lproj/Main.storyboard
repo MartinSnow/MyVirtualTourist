@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="TID-V9-ILV">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -29,12 +29,14 @@
                             <constraint firstItem="LXz-jF-OqJ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="mbH-WK-i4K"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="yhs-6P-wnE"/>
                     <connections>
                         <outlet property="mapView" destination="LXz-jF-OqJ" id="b2l-BZ-i8N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="35.532233883058474"/>
         </scene>
         <!--AlbumViewController-->
         <scene sceneID="aLh-sz-AA9">
@@ -54,7 +56,7 @@
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pib-PP-wJ6">
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="450" id="QgB-kS-DAe"/>
+                                            <constraint firstAttribute="height" constant="400" id="mim-Bd-Y5s"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gqk-eb-36x">
                                             <size key="itemSize" width="100" height="100"/>
@@ -106,7 +108,6 @@
                                     <constraint firstItem="zcJ-n8-FQ1" firstAttribute="top" secondItem="pib-PP-wJ6" secondAttribute="bottom" id="GsF-bG-fJA"/>
                                     <constraint firstItem="pib-PP-wJ6" firstAttribute="leading" secondItem="Jfm-Ks-IjF" secondAttribute="leading" id="LSb-D3-yoa"/>
                                     <constraint firstItem="hyX-yQ-q5o" firstAttribute="leading" secondItem="Jfm-Ks-IjF" secondAttribute="leading" id="RJA-U0-B9y"/>
-                                    <constraint firstItem="hyX-yQ-q5o" firstAttribute="top" secondItem="Jfm-Ks-IjF" secondAttribute="top" id="THY-Lw-e0Y"/>
                                     <constraint firstAttribute="trailing" secondItem="pib-PP-wJ6" secondAttribute="trailing" id="emm-rM-97v"/>
                                     <constraint firstItem="zcJ-n8-FQ1" firstAttribute="leading" secondItem="Jfm-Ks-IjF" secondAttribute="leading" id="n6N-mQ-fHk"/>
                                     <constraint firstAttribute="trailing" secondItem="hyX-yQ-q5o" secondAttribute="trailing" id="ngJ-B4-yEU"/>
@@ -128,7 +129,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xcY-8N-vfa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1237.5999999999999" y="35.532233883058474"/>
+            <point key="canvasLocation" x="749.60000000000002" y="35.532233883058474"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="CzF-Yj-Kdv">
+            <objects>
+                <navigationController id="TID-V9-ILV" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4oO-hZ-uvB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Fi2-M1-YHx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="52T-v0-Kka" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-726" y="36"/>
         </scene>
     </scenes>
 </document>

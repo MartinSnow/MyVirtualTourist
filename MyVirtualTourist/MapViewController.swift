@@ -65,8 +65,8 @@ class mapViewController: UIViewController, MKMapViewDelegate {
                 print("There was an error with your request: \(error)")
             } else {
                 performUIUpdatesOnMain {
-                    let controller = self.storyboard!.instantiateViewController(withIdentifier: "AlbumViewController")
-                    self.present(controller, animated: true, completion: nil)
+                    let AlbumViewController = self.storyboard!.instantiateViewController(withIdentifier: "AlbumViewController")
+                    self.navigationController!.pushViewController(AlbumViewController, animated: true)
                 }
             }
         }

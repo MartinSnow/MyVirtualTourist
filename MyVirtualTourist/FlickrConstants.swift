@@ -6,9 +6,11 @@
 //  Copyright © 2017年 Ma Ding. All rights reserved.
 //
 //
+
+import MapKit
 // MARK: - Constants
 
-struct Constants {
+struct Constants  {
     
     // MARK: Flickr
     struct Flickr {
@@ -55,4 +57,11 @@ struct Constants {
     struct FlickrResponseValues {
         static let OKStatus = "ok"
     }
+    
+    // Mark: Photos Url
+    static var photosUrl = [String]()
+    
+    // Mark: Annotation
+    static var annotation = MKPointAnnotation()
+
 }

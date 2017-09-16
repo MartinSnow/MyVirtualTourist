@@ -45,17 +45,16 @@ class mapViewController: UIViewController, MKMapViewDelegate {
         print("lat is \(coordinate.latitude) and lon is \(coordinate.longitude)")
         
         // Create an annotation model
-        let annotation = MKPointAnnotation()
         Constants.FlickrParameterValues.LatValue = Float(coordinate.latitude)
         Constants.FlickrParameterValues.LonValue = Float(coordinate.longitude)
         
         // Add annotation's properties
-        annotation.coordinate = coordinate
-        annotation.title = "title"
-        annotation.subtitle = "subtitle"
+        Constants.annotation.coordinate = coordinate
+        Constants.annotation.title = "title"
+        Constants.annotation.subtitle = "subtitle"
         
         // Add annotation model on the map
-        mapView.addAnnotation(annotation)
+        mapView.addAnnotation(Constants.annotation)
     }
     
     // Go to Album Collection

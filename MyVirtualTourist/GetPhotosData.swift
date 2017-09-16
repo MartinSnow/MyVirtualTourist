@@ -80,8 +80,8 @@ extension mapViewController {
             }
             
             // Get photos url_m
-            let photosUrl = self.getPhotosUrl(photoArray: photoArray, key: "url_m")
-            print("PhotosUrl is \(photosUrl)")
+            Constants.photosUrl = self.getPhotosUrl(photoArray: photoArray, key: "url_m")
+            print("PhotosUrl is \(Constants.photosUrl)")
             
             
         }

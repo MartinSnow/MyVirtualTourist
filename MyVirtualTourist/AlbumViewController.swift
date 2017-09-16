@@ -17,10 +17,14 @@ class albumViewController: UIViewController, UICollectionViewDelegate, MKMapView
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var albumCollection: UICollectionView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.mapView.showAnnotations([Constants.annotation], animated: false)
+    }
+    
+    // Reload photos album
     @IBAction func loadNewPhotos(_ sender: AnyObject) {
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    
 }

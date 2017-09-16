@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class albumViewController: UIViewController, UICollectionViewDelegate, MKMapViewDelegate {
+class albumViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, MKMapViewDelegate {
     
     // Properties
     
@@ -20,6 +20,25 @@ class albumViewController: UIViewController, UICollectionViewDelegate, MKMapView
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mapView.showAnnotations([Constants.annotation], animated: false)
+    }
+    
+    // Find number of items
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return Constants.photosUrl.count
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCollectionViewCell", for: indexPath) as! photoCollectionViewCell
+        let photoURL = URL(string: Constants.photosUrl[(indexPath as NSIndexPath).item])
+        if let photoData = try? Data(contentsOf: photoURL!) {
+            performUIUpdatesOnMain {
+                cell.photoImageView?.image = UIImage(data: photoData)
+            }
+        } else {
+            print("Image does not exist at \(photoURL)")
+        }
+        return cell
     }
     
     // Reload photos album

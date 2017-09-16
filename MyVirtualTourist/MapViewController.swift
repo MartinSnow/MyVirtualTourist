@@ -60,9 +60,17 @@ class mapViewController: UIViewController, MKMapViewDelegate {
     // Go to Album Collection
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
-        getPhotosData()
-        let controller = self.storyboard!.instantiateViewController(withIdentifier: "AlbumViewController")
-        self.present(controller, animated: true, completion: nil)
+        getPhotosData() {(error) in
+            if error != nil {
+                print("There was an error with your request: \(error)")
+            } else {
+                performUIUpdatesOnMain {
+                    let controller = self.storyboard!.instantiateViewController(withIdentifier: "AlbumViewController")
+                    self.present(controller, animated: true, completion: nil)
+                }
+            }
+        }
+        
     }
 }
 

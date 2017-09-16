@@ -13,7 +13,7 @@ extension mapViewController {
     
     // Mark: Get Photos Data
     func getPhotosData() {
-    
+        
         let methodParameters = [
             Constants.FlickrParameterKeys.Method: Constants.FlickrParameterValues.SearchMethod,
             Constants.FlickrParameterKeys.APIKey: Constants.FlickrParameterValues.APIKeyValue,
@@ -21,12 +21,13 @@ extension mapViewController {
             Constants.FlickrParameterKeys.Longitude: Constants.FlickrParameterValues.LonValue,
             Constants.FlickrParameterKeys.Extras: Constants.FlickrParameterValues.MediumURL,
             Constants.FlickrParameterKeys.Format: Constants.FlickrParameterValues.ResponseFormat,
-            Constants.FlickrParameterKeys.NoJSONCallback: Constants.FlickrParameterValues.DisableJSONCallback, Constants.FlickrParameterKeys.AuthToken: Constants.FlickrParameterValues.AuthValue, Constants.FlickrParameterKeys.APISig: Constants.FlickrParameterValues.APISigValue
-        ] as [String : Any]
+            Constants.FlickrParameterKeys.NoJSONCallback: Constants.FlickrParameterValues.DisableJSONCallback, /*Constants.FlickrParameterKeys.AuthToken: Constants.FlickrParameterValues.AuthValue, Constants.FlickrParameterKeys.APISig: Constants.FlickrParameterValues.APISigValue*/
+            ] as [String : Any]
         
         // create url and request
         let session = URLSession.shared
         let urlString = Constants.Flickr.APIBaseURL + escapedParameters(methodParameters as [String:AnyObject])
+        print("urlString is \(urlString)")
         let url = URL(string: urlString)!
         let request = URLRequest(url: url)
         
@@ -78,7 +79,11 @@ extension mapViewController {
                 return
             }
             
-            print("PhotoArray is \(photoArray)")
+            // Get photos url_m
+            let photosUrl = self.getPhotosUrl(photoArray: photoArray, key: "url_m")
+            print("PhotosUrl is \(photosUrl)")
+            
+            
         }
         // start the task!
         task.resume()
@@ -106,5 +111,16 @@ extension mapViewController {
             }
             return "?\(keyValuePairs.joined(separator: "&"))"
         }
+    }
+    
+    // Get photos url
+    private func getPhotosUrl(photoArray: [[String: AnyObject]], key: String) -> Array<String> {
+    
+        var photosUrl = [String]()
+        for photo in photoArray {
+        
+            photosUrl.append(photo["url_m"] as! String)
+        }
+        return photosUrl
     }
 }

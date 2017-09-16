@@ -24,8 +24,8 @@ struct Constants {
         static let Extras = "extras"
         static let Format = "format"
         static let NoJSONCallback = "nojsoncallback"
-        static let AuthToken = "auth_token"
-        static let APISig = "api_sig"
+        //static let AuthToken = "auth_token"
+        //static let APISig = "api_sig"
     }
     
     // MARK: Flickr Parameter Values
@@ -37,8 +37,8 @@ struct Constants {
         static let MediumURL = "url_m"
         static let ResponseFormat = "json"
         static let DisableJSONCallback = "1" /* 1 means "yes" */
-        static let AuthValue = "72157686618965603-0cbcc3f8965bba70"
-        static let APISigValue = "54fa50374c1fa0d4fa34097e320fbbde"
+        //static let AuthValue = "72157689114528375-0e85e9322f97b8e0"
+        //static let APISigValue = "54fa50374c1fa0d4fa34097e320fbbde"
         
     }
     

@@ -1,5 +1,5 @@
 //
-//  Location.swift
+//  PinLocation.swift
 //  MyVirtualTourist
 //
 //  Created by Ma Ding on 17/9/17.
@@ -8,7 +8,7 @@
 
 import MapKit
 
-struct location {
+struct pinLocation {
     
     //Mark: Pin properties
     static var pinAnnotation = Annotation(title: "", subtitle: "", coordinate: CLLocationCoordinate2D())

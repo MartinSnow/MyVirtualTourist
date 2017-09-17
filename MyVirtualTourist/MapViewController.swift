@@ -8,8 +8,9 @@
 
 import UIKit
 import MapKit
+import CoreData
 
-class mapViewController: UIViewController, MKMapViewDelegate {
+class mapViewController: coreDataCollectionViewController, MKMapViewDelegate {
     
     // Mark: Properties
     
@@ -25,6 +26,20 @@ class mapViewController: UIViewController, MKMapViewDelegate {
         let longPress = UILongPressGestureRecognizer(target:self,
                                                      action:#selector(addAPin(_:)))
         self.view.addGestureRecognizer(longPress)
+        
+        // Set the title
+        title = "World Map"
+        
+        // Get the stack
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let stack = delegate.stack
+        
+        // Create a fetchrequest
+        let fr = NSFetchRequest<NSFetchRequestResult>(entityName:"Location")
+        fr.sortDescriptors = [NSSortDescriptor(key: "locationName", ascending: false), NSSortDescriptor(key: "latitudeValue", ascending: false), NSSortDescriptor(key: "longitudeValue", ascending: false), NSSortDescriptor(key: "creationDate", ascending: false)]
+        
+        // Create the FetchResultsController
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
     }
     
     // Add a pin on the map
@@ -39,14 +54,18 @@ class mapViewController: UIViewController, MKMapViewDelegate {
         let touchPoint = gestureRecognizer.location(in: mapView)
         
         // Turn the location to coordinate
-        location.pinCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-        print("lat is \(location.pinCoordinate.latitude) and lon is \(location.pinCoordinate.longitude)")
+        pinLocation.pinCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+        print("lat is \(pinLocation.pinCoordinate.latitude) and lon is \(pinLocation.pinCoordinate.longitude)")
+        
+        // Get location's name and latitude and longitude
+        let location = Location(locationName: "location", latitudeValue: Float(pinLocation.pinCoordinate.latitude), longitudeValue: Float(pinLocation.pinCoordinate.longitude), context: fetchedResultsController!.managedObjectContext)
+        print("Just created a notebook: \(location)")
         
         // Create pin annotation
-        location.pinAnnotation = Annotation(title: "title", subtitle: "subtitle", coordinate: location.pinCoordinate)
+        pinLocation.pinAnnotation = Annotation(title: "title", subtitle: "subtitle", coordinate: pinLocation.pinCoordinate)
         
         // Add pin on the map
-        mapView.addAnnotation(location.pinAnnotation)
+        mapView.addAnnotation(pinLocation.pinAnnotation)
     }
     
     // Go to Album Collection

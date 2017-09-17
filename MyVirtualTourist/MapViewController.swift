@@ -42,10 +42,6 @@ class mapViewController: UIViewController, MKMapViewDelegate {
         location.pinCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
         print("lat is \(location.pinCoordinate.latitude) and lon is \(location.pinCoordinate.longitude)")
         
-        // Create an annotation model
-        Constants.FlickrParameterValues.LatValue = Float(location.pinCoordinate.latitude)
-        Constants.FlickrParameterValues.LonValue = Float(location.pinCoordinate.longitude)
-        
         // Create pin annotation
         location.pinAnnotation = Annotation(title: "title", subtitle: "subtitle", coordinate: location.pinCoordinate)
         
@@ -55,6 +51,15 @@ class mapViewController: UIViewController, MKMapViewDelegate {
     
     // Go to Album Collection
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        if let pinAnnotation = view.annotation {
+        
+            Constants.FlickrParameterValues.LatValue = Float(pinAnnotation.coordinate.latitude)
+            Constants.FlickrParameterValues.LonValue = Float(pinAnnotation.coordinate.longitude)
+        } else {
+            print("pinAnnotation is nil")
+            return
+        }
         
         getPhotosData() {(error) in
             if error != nil {

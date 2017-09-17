@@ -13,8 +13,6 @@ class mapViewController: UIViewController, MKMapViewDelegate {
     
     // Mark: Properties
     
-    public var coordinate = CLLocationCoordinate2D()
-    
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
@@ -41,20 +39,18 @@ class mapViewController: UIViewController, MKMapViewDelegate {
         let touchPoint = gestureRecognizer.location(in: mapView)
         
         // Turn the location to coordinate
-        coordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-        print("lat is \(coordinate.latitude) and lon is \(coordinate.longitude)")
+        location.pinCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+        print("lat is \(location.pinCoordinate.latitude) and lon is \(location.pinCoordinate.longitude)")
         
         // Create an annotation model
-        Constants.FlickrParameterValues.LatValue = Float(coordinate.latitude)
-        Constants.FlickrParameterValues.LonValue = Float(coordinate.longitude)
+        Constants.FlickrParameterValues.LatValue = Float(location.pinCoordinate.latitude)
+        Constants.FlickrParameterValues.LonValue = Float(location.pinCoordinate.longitude)
         
-        // Add annotation's properties
-        Constants.annotation.coordinate = coordinate
-        Constants.annotation.title = "title"
-        Constants.annotation.subtitle = "subtitle"
+        // Create pin annotation
+        location.pinAnnotation = Annotation(title: "title", subtitle: "subtitle", coordinate: location.pinCoordinate)
         
-        // Add annotation model on the map
-        mapView.addAnnotation(Constants.annotation)
+        // Add pin on the map
+        mapView.addAnnotation(location.pinAnnotation)
     }
     
     // Go to Album Collection

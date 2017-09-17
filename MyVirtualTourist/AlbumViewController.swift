@@ -19,7 +19,9 @@ class albumViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.mapView.showAnnotations([Constants.annotation], animated: false)
+        let spanLevel: CLLocationDistance = 2000
+        self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(location.pinCoordinate, spanLevel, spanLevel), animated: true)
+        self.mapView.addAnnotation(location.pinAnnotation)
     }
     
     // Find number of items

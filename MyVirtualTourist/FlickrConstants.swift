@@ -60,8 +60,5 @@ struct Constants  {
     
     // Mark: Photos Url
     static var photosUrl = [String]()
-    
-    // Mark: Annotation
-    static var annotation = MKPointAnnotation()
 
 }

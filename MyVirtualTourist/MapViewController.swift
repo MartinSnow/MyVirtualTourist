@@ -8,10 +8,19 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 class mapViewController: UIViewController, MKMapViewDelegate {
     
     // Mark: Properties
+    var latitude: Double?
+    var longitude: Double?
+    var coordinate: CLLocationCoordinate2D?
+    var annotation: MKPointAnnotation?
+    var locations: [Location]?
+    
+    // Get the stack
+    let stack = (UIApplication.shared.delegate as! AppDelegate).stack
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -20,6 +29,9 @@ class mapViewController: UIViewController, MKMapViewDelegate {
         
         // Set mapView's delegate
         mapView.delegate = self
+        
+        // Display pins that created before
+        loadPins()
         
         // Add longPress gesture
         let longPress = UILongPressGestureRecognizer(target:self,
@@ -39,15 +51,52 @@ class mapViewController: UIViewController, MKMapViewDelegate {
         let touchPoint = gestureRecognizer.location(in: mapView)
         
         // Turn the location to coordinate
-        location.pinCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-        print("lat is \(location.pinCoordinate.latitude) and lon is \(location.pinCoordinate.longitude)")
-        
-        // Create pin annotation
-        location.pinAnnotation = Annotation(title: "title", subtitle: "subtitle", coordinate: location.pinCoordinate)
+        self.coordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
+        self.annotation = MKPointAnnotation()
+        self.annotation?.coordinate = self.coordinate!
+        self.latitude = self.coordinate?.latitude
+        self.longitude = self.coordinate?.longitude
+        //print("lat is \(self.latitude) and lon is \(self.longitude)")
         
         // Add pin on the map
-        mapView.addAnnotation(location.pinAnnotation)
+        mapView.addAnnotation(annotation!)
+        
+        // Save location
+        let location = Location(latitude: self.latitude!, longitude: self.longitude!, context: stack.context)
+        locations?.append(location)
+        print("locations is \(locations)")
+        do {
+            try stack.context.save()
+            print("save locations")
+        } catch {
+            print("Error saving the locations")
+        }
     }
+    
+    // Load pins that previously created
+    func loadPins() {
+        
+        // Create a fetch request
+        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: "Location")
+        fr.sortDescriptors = [NSSortDescriptor(key: "latitudeValue", ascending: true)]
+        
+        // Fetch the Location objects in the context.
+        do {
+            locations = try stack.context.fetch(fr) as? [Location]
+            print("locations is \(locations)")
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        // Display pins on the map
+        for pin in locations! {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = CLLocationCoordinate2D(latitude: pin.latitudeValue, longitude: pin.longitudeValue)
+            mapView.addAnnotation(annotation)
+        }
+        print("display pins")
+    }
+    
     
     // Go to Album Collection
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {

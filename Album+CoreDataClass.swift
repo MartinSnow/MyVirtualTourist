@@ -2,7 +2,7 @@
 //  Album+CoreDataClass.swift
 //  MyVirtualTourist
 //
-//  Created by Ma Ding on 17/9/15.
+//  Created by Ma Ding on 17/9/23.
 //  Copyright © 2017年 Ma Ding. All rights reserved.
 //
 

@@ -26,6 +26,7 @@ struct Constants  {
         static let Extras = "extras"
         static let Format = "format"
         static let NoJSONCallback = "nojsoncallback"
+        static let Page = "page"
         //static let AuthToken = "auth_token"
         //static let APISig = "api_sig"
     }
@@ -34,8 +35,8 @@ struct Constants  {
     struct FlickrParameterValues {
         static let SearchMethod = "flickr.photos.search"
         static let APIKeyValue = "c8d4a64043c50d6329d7c2f1d2a27fdc"
-        static var LatValue = Float()
-        static var LonValue = Float()
+        static var LatValue = Double()
+        static var LonValue = Double()
         static let MediumURL = "url_m"
         static let ResponseFormat = "json"
         static let DisableJSONCallback = "1" /* 1 means "yes" */

@@ -1,5 +1,5 @@
 //
-//  GetPhotosData.swift
+//  GetImageUrls.swift
 //  MyVirtualTourist
 //
 //  Created by Ma Ding on 17/9/15.
@@ -7,12 +7,11 @@
 //
 
 import Foundation
-import UIKit
 
-extension mapViewController {
+class GetImageUrls {
     
     // Mark: Get Photos Data
-    func getPhotosData(completionHandlerForGetPhotosData: @escaping (_ error: NSError?) -> Void) -> URLSessionDataTask {
+    func getImageUrls(pageNumber: Int, completionHandlerForGetPhotosUrls: @escaping (_ success: Bool, _ photosUrl: [String]?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
         let methodParameters = [
             Constants.FlickrParameterKeys.Method: Constants.FlickrParameterValues.SearchMethod,
@@ -21,7 +20,7 @@ extension mapViewController {
             Constants.FlickrParameterKeys.Longitude: Constants.FlickrParameterValues.LonValue,
             Constants.FlickrParameterKeys.Extras: Constants.FlickrParameterValues.MediumURL,
             Constants.FlickrParameterKeys.Format: Constants.FlickrParameterValues.ResponseFormat,
-            Constants.FlickrParameterKeys.NoJSONCallback: Constants.FlickrParameterValues.DisableJSONCallback, /*Constants.FlickrParameterKeys.AuthToken: Constants.FlickrParameterValues.AuthValue, Constants.FlickrParameterKeys.APISig: Constants.FlickrParameterValues.APISigValue*/
+            Constants.FlickrParameterKeys.NoJSONCallback: Constants.FlickrParameterValues.DisableJSONCallback, Constants.FlickrParameterKeys.Page: pageNumber /*Constants.FlickrParameterKeys.AuthToken: Constants.FlickrParameterValues.AuthValue, Constants.FlickrParameterKeys.APISig: Constants.FlickrParameterValues.APISigValue*/
             ] as [String : Any]
         
         // create url and request
@@ -41,7 +40,7 @@ extension mapViewController {
             
             /* GUARD: Was there an error? */
             if error != nil {
-                completionHandlerForGetPhotosData(error! as NSError)
+                completionHandlerForGetPhotosUrls(false, nil, error! as NSError)
             } else {
                 /* GUARD: Did we get a successful 2XX response? */
                 guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
@@ -77,9 +76,10 @@ extension mapViewController {
                 }
                 
                 // Get photos url_m
-                Constants.photosUrl = self.getPhotosUrl(photoArray: photoArray, key: "url_m")
-                print("PhotosUrl is \(Constants.photosUrl)")
-                completionHandlerForGetPhotosData(nil)
+                var photosUrl = [String]()
+                photosUrl = self.getPhotosUrl(photoArray: photoArray, key: "url_m")
+                print("PhotosUrl is \(photosUrl)")
+                completionHandlerForGetPhotosUrls(true, photosUrl, nil)
             }
         }
         // start the task!
@@ -120,5 +120,28 @@ extension mapViewController {
             photosUrl.append(photo["url_m"] as! String)
         }
         return photosUrl
+    }
+    
+    static var sharedInstance = GetImageUrls()
+    
+    // Helper method: given a URL, get the UIImage to load in the collection view cell
+    func downloadPhotoWith(url: String, completionHandlerForDownload: @escaping (_ success: Bool, _ imageData: NSData?, _ error: Error?) -> Void) {
+        
+        let session = URLSession.shared
+        
+        // Convert the url string to URL so that it can be passed into dataTask(with url:)
+        let photoURL = URL(string: url)
+        
+        let task = session.dataTask(with: photoURL!) { (data, response, error) in
+            
+            guard let imageData = data else {
+                completionHandlerForDownload(false, nil, error)
+                return
+            }
+            
+            completionHandlerForDownload(true, imageData as NSData?, nil)
+        }
+        
+        task.resume()
     }
 }

@@ -18,6 +18,7 @@ class mapViewController: UIViewController, MKMapViewDelegate {
     var coordinate: CLLocationCoordinate2D?
     var annotation: MKPointAnnotation?
     var locations: [Location]?
+    var tappedPinLocation: Location?
     
     // Get the stack
     let stack = (UIApplication.shared.delegate as! AppDelegate).stack
@@ -103,24 +104,26 @@ class mapViewController: UIViewController, MKMapViewDelegate {
         
         if let pinAnnotation = view.annotation {
         
-            Constants.FlickrParameterValues.LatValue = Float(pinAnnotation.coordinate.latitude)
-            Constants.FlickrParameterValues.LonValue = Float(pinAnnotation.coordinate.longitude)
+            Constants.FlickrParameterValues.LatValue = pinAnnotation.coordinate.latitude
+            Constants.FlickrParameterValues.LonValue = pinAnnotation.coordinate.longitude
         } else {
             print("pinAnnotation is nil")
             return
         }
         
-        getPhotosData() {(error) in
-            if error != nil {
-                print("There was an error with your request: \(error)")
-            } else {
-                performUIUpdatesOnMain {
-                    let AlbumViewController = self.storyboard!.instantiateViewController(withIdentifier: "AlbumViewController")
-                    self.navigationController!.pushViewController(AlbumViewController, animated: true)
-                }
+        // Choose the current Location
+        for location in locations! {
+            if location.latitudeValue == Constants.FlickrParameterValues.LatValue && location.longitudeValue == Constants.FlickrParameterValues.LonValue {
+                self.tappedPinLocation = location
             }
         }
         
+        let AlbumViewController = self.storyboard!.instantiateViewController(withIdentifier: "AlbumViewController") as! albumViewController
+        AlbumViewController.tappedPinLocation = self.tappedPinLocation
+        self.navigationController!.pushViewController(AlbumViewController, animated: true)
+        
+        // Deselect the pin so that it's selectable again when we return from PhotosViewController
+        self.mapView.deselectAnnotation(self.annotation, animated: true)
     }
 }
 

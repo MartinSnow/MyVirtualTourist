@@ -11,16 +11,16 @@ import Foundation
 class GetImageUrls {
     
     // Mark: Get Photos Data
-    func getImageUrls(pageNumber: Int, completionHandlerForGetPhotosUrls: @escaping (_ success: Bool, _ photosUrl: [String]?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    func getImageUrls(latitude: Double, longitude: Double, pageNumber: Int, completionHandlerForGetPhotosUrls: @escaping (_ success: Bool, _ photosUrl: [String]?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
         let methodParameters = [
             Constants.FlickrParameterKeys.Method: Constants.FlickrParameterValues.SearchMethod,
             Constants.FlickrParameterKeys.APIKey: Constants.FlickrParameterValues.APIKeyValue,
-            Constants.FlickrParameterKeys.Latitude: Constants.FlickrParameterValues.LatValue,
-            Constants.FlickrParameterKeys.Longitude: Constants.FlickrParameterValues.LonValue,
+            Constants.FlickrParameterKeys.Latitude: latitude,
+            Constants.FlickrParameterKeys.Longitude: longitude,
             Constants.FlickrParameterKeys.Extras: Constants.FlickrParameterValues.MediumURL,
             Constants.FlickrParameterKeys.Format: Constants.FlickrParameterValues.ResponseFormat,
-            Constants.FlickrParameterKeys.NoJSONCallback: Constants.FlickrParameterValues.DisableJSONCallback, Constants.FlickrParameterKeys.Page: pageNumber /*Constants.FlickrParameterKeys.AuthToken: Constants.FlickrParameterValues.AuthValue, Constants.FlickrParameterKeys.APISig: Constants.FlickrParameterValues.APISigValue*/
+            Constants.FlickrParameterKeys.NoJSONCallback: Constants.FlickrParameterValues.DisableJSONCallback, Constants.FlickrParameterKeys.Page: pageNumber, Constants.FlickrParameterKeys.PerPage: Constants.FlickrParameterValues.PerPage /*Constants.FlickrParameterKeys.AuthToken: Constants.FlickrParameterValues.AuthValue, Constants.FlickrParameterKeys.APISig: Constants.FlickrParameterValues.APISigValue*/
             ] as [String : Any]
         
         // create url and request

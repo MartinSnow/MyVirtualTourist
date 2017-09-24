@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class albumViewController: UIViewController, NSFetchedResultsControllerDelegate {
+class albumViewController: UIViewController {
     
     // Properties
     
@@ -19,6 +19,14 @@ class albumViewController: UIViewController, NSFetchedResultsControllerDelegate 
     
     var coordinate: CLLocationCoordinate2D?
     var tappedPinLocation: Location?
+    var latitude: Double?
+    var longitude: Double?
+    
+    // Store an array of cells that the user tapped to be deleted.
+    var tappedIndexPaths = [IndexPath]()
+    var insertedIndexPaths: [IndexPath]!
+    var deletedIndexPaths: [IndexPath]!
+    var updatedIndexPaths: [IndexPath]!
     
     lazy var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> = {
         
@@ -53,10 +61,13 @@ class albumViewController: UIViewController, NSFetchedResultsControllerDelegate 
         if fetchedObjects?.count == 0 {
             loadPhotos(pageNumber: 1)
         }
+        
+        albumCollection.delegate = self
+        albumCollection.dataSource = self
     }
     
     func loadPhotos(pageNumber: Int) {
-        GetImageUrls.sharedInstance.getImageUrls(pageNumber: pageNumber){(success, photosUrl, error) in
+        GetImageUrls.sharedInstance.getImageUrls(latitude: latitude!, longitude: longitude!, pageNumber: pageNumber){(success, photosUrl, error) in
             if success {
                 
                 for url in photosUrl! {
@@ -65,6 +76,7 @@ class albumViewController: UIViewController, NSFetchedResultsControllerDelegate 
                 }
                 do {
                     try self.stack.context.save()
+                    print("save url")
                 } catch {
                     print("Error saving the url")
                 }
@@ -81,11 +93,16 @@ class albumViewController: UIViewController, NSFetchedResultsControllerDelegate 
     
     func displayPin() {
         let annotation = MKPointAnnotation()
-        let spanLevel: CLLocationDistance = 2000
-        let coordinate = CLLocationCoordinate2D(latitude: tappedPinLocation!.latitudeValue, longitude: tappedPinLocation!.longitudeValue)
-        annotation.coordinate = coordinate
-        self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(coordinate, spanLevel, spanLevel), animated: true)
-        self.mapView.addAnnotation(annotation)
+        annotation.coordinate = coordinate!
+        mapView.addAnnotation(annotation)
+        
+        // Zoom map to the correct region for showing the pin
+        self.mapView.centerCoordinate = self.coordinate!
+        // Instantiate an MKCoordinateSpanMake to pass into MKCoordinateRegion
+        let coordinateSpan = MKCoordinateSpanMake(80,80)
+        // Instantiate an MKCoordinateRegion to pass into setRegion.
+        let coordinateRegion = MKCoordinateRegion(center: coordinate!, span: coordinateSpan)
+        self.mapView.setRegion(coordinateRegion, animated: true)
     }
     
     // Reload photos album
@@ -93,14 +110,15 @@ class albumViewController: UIViewController, NSFetchedResultsControllerDelegate 
     }
 }
 
-extension albumViewController {
+extension albumViewController: UICollectionViewDataSource {
     
     // Find number of items
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchedResultsController.sections![0].numberOfObjects
+        
+        return fetchedResultsController.sections![section].numberOfObjects
     }
     
-     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCollectionViewCell", for: indexPath) as! photoCollectionViewCell
         // The fr should have access to the photo URLs downloaded in loadPhotos()
         let photoToLoad = fetchedResultsController.object(at: indexPath) as! Album
@@ -132,4 +150,83 @@ extension albumViewController {
         }
         return cell
      }
+}
+
+// MARK: UICollectionViewDelegate
+extension albumViewController: UICollectionViewDelegate {
+    
+    // Things to do when a user taps photo cells
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        // Fade out selected cells
+        let cell = collectionView.cellForItem(at: indexPath as IndexPath)
+        cell?.alpha = 0.5
+        
+        // Whenever user selects one or more cells, the bar button changes to Remove seleceted pictures
+        //self.barButton.title = "Remove selected pictures"
+        
+        self.tappedIndexPaths.append(indexPath)
+    }
+    
+}
+
+// MARK: NSFetchedResultsControllerDelegate
+extension albumViewController: NSFetchedResultsControllerDelegate {
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        
+        insertedIndexPaths = [IndexPath]()
+        deletedIndexPaths = [IndexPath]()
+        updatedIndexPaths = [IndexPath]()
+    }
+    
+    // https://www.youtube.com/watch?v=0JJJ2WGpw_I (13:50-15:00)
+    // This method is only called when anything in the context has been added or deleted. It collects the indexPaths that have changed. Then, in controllerDidChangeContent, the changes are applied to the UI.
+    // The indexPath value is nil for insertions, and the newIndexPath value is nil for deletions.
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        switch type {
+            
+        case .insert:
+            insertedIndexPaths.append(newIndexPath!)
+            print("Inserted a new index path")
+            break
+            
+        case .delete:
+            deletedIndexPaths.append(indexPath!)
+            print("Deleted an index path")
+            break
+            
+        case .update:
+            updatedIndexPaths.append(indexPath!)
+            print("Updated an index path")
+            break
+            
+        default:
+            break
+        }
+    }
+    
+    // https://www.youtube.com/watch?v=0JJJ2WGpw_I (18:15)
+    // Updates the UI so that it syncs up with Core Data. This method doesn't change anything in Core Data.
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        
+        albumCollection.performBatchUpdates({
+            
+            for indexPath in self.insertedIndexPaths{
+                self.albumCollection.insertItems(at: [indexPath as IndexPath])
+            }
+            
+            for indexPath in self.deletedIndexPaths{
+                self.albumCollection.deleteItems(at: [indexPath as IndexPath])
+            }
+            
+            for indexPath in self.updatedIndexPaths{
+                self.albumCollection.reloadItems(at: [indexPath as IndexPath])
+            }
+            
+            }, completion: nil)
+        
+    }
+    
 }

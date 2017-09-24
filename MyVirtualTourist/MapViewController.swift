@@ -102,25 +102,23 @@ class mapViewController: UIViewController, MKMapViewDelegate {
     // Go to Album Collection
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
-        if let pinAnnotation = view.annotation {
+        let AlbumViewController = self.storyboard!.instantiateViewController(withIdentifier: "AlbumViewController") as! albumViewController
         
-            Constants.FlickrParameterValues.LatValue = pinAnnotation.coordinate.latitude
-            Constants.FlickrParameterValues.LonValue = pinAnnotation.coordinate.longitude
-        } else {
-            print("pinAnnotation is nil")
-            return
-        }
+        self.navigationController!.pushViewController(AlbumViewController, animated: true)
+        
+        // Pass the tapped pin coordinates to the PhotosViewController
+        AlbumViewController.coordinate = view.annotation?.coordinate
+        AlbumViewController.latitude = view.annotation?.coordinate.latitude
+        AlbumViewController.longitude = view.annotation?.coordinate.longitude
         
         // Choose the current Location
         for location in locations! {
-            if location.latitudeValue == Constants.FlickrParameterValues.LatValue && location.longitudeValue == Constants.FlickrParameterValues.LonValue {
+            if location.latitudeValue == view.annotation?.coordinate.latitude && location.longitudeValue == view.annotation?.coordinate.longitude {
                 self.tappedPinLocation = location
             }
         }
         
-        let AlbumViewController = self.storyboard!.instantiateViewController(withIdentifier: "AlbumViewController") as! albumViewController
         AlbumViewController.tappedPinLocation = self.tappedPinLocation
-        self.navigationController!.pushViewController(AlbumViewController, animated: true)
         
         // Deselect the pin so that it's selectable again when we return from PhotosViewController
         self.mapView.deselectAnnotation(self.annotation, animated: true)

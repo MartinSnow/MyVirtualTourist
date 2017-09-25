@@ -2,7 +2,7 @@
 //  Location+CoreDataClass.swift
 //  MyVirtualTourist
 //
-//  Created by Ma Ding on 17/9/23.
+//  Created by Ma Ding on 17/9/25.
 //  Copyright © 2017年 Ma Ding. All rights reserved.
 //
 
@@ -25,5 +25,6 @@ public class Location: NSManagedObject {
             fatalError("Unable to find Entity name!")
         }
     }
+
 
 }

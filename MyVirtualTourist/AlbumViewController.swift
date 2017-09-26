@@ -16,6 +16,7 @@ class albumViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var albumCollection: UICollectionView!
+    @IBOutlet weak var barButtonItem: UIBarButtonItem!
     
     var coordinate: CLLocationCoordinate2D?
     var tappedPinLocation: Location?
@@ -72,7 +73,7 @@ class albumViewController: UIViewController {
                 
                 for url in photosUrl! {
                     let photo = Album(location: self.tappedPinLocation!, imageUrl: url, context: self.stack.context)
-                    print("photo is \(photo)")
+                    //print("photo is \(photo)")
                 }
                 do {
                     try self.stack.context.save()
@@ -105,8 +106,58 @@ class albumViewController: UIViewController {
         self.mapView.setRegion(coordinateRegion, animated: true)
     }
     
-    // Reload photos album
-    @IBAction func loadNewPhotos(_ sender: AnyObject) {
+    // Delete the photos selected by the user from Core Data.
+    func deleteSelectedPhotos() {
+        
+        // Delete the photos corresponding to the indexes stored in self.tappedIndexPaths (populated in didSelectItemAt)
+        for indexPath in tappedIndexPaths {
+            
+            stack.context.delete(fetchedResultsController.object(at: indexPath as IndexPath) as! Album)
+        }
+        
+        do {
+            try stack.context.save()
+        } catch {
+            print("Error saving the context after deleting photos")
+        }
+        
+        albumCollection.reloadData()
+    }
+    
+    // Delete all the existing photos when the users presses Refresh collection.
+    func deleteAllPhotos() {
+        
+        for object in fetchedResultsController.fetchedObjects! {
+            
+            stack.context.delete(object as! Album)
+            print("delete photos")
+        }
+    }
+    
+    // Tap the button
+    @IBAction func deleteOrRefresh(_ sender: AnyObject) {
+        if barButtonItem.title == "Remove selected pictures" {
+            
+            deleteSelectedPhotos()
+            
+            self.barButtonItem.title = "Refresh collection"
+            
+        } else {
+            print("Clicked Refresh collection")
+            
+            deleteAllPhotos()
+            
+            GetImageUrls.sharedInstance.getNumbersofPages(latitude: self.latitude!, longitude: self.longitude!) { (success, numberOfPages, error) in
+                
+                if success {
+                    
+                    let pageNumber = (arc4random_uniform(UInt32(numberOfPages!)))
+                    print("pageNumber is \(pageNumber)")
+                    self.loadPhotos(pageNumber: Int(pageNumber))
+                }
+            }
+        }
+
     }
 }
 
@@ -169,7 +220,7 @@ extension albumViewController: UICollectionViewDelegate {
         cell?.alpha = 0.5
         
         // Whenever user selects one or more cells, the bar button changes to Remove seleceted pictures
-        //self.barButton.title = "Remove selected pictures"
+        self.barButtonItem.title = "Remove selected pictures"
         
         self.tappedIndexPaths.append(indexPath)
     }

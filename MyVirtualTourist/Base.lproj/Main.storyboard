@@ -97,26 +97,30 @@
                                             <outlet property="delegate" destination="Rac-Yn-Y2o" id="6qg-LL-4D3"/>
                                         </connections>
                                     </collectionView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcJ-n8-FQ1">
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y1J-aL-sFy">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="R1F-MI-RTG"/>
+                                            <constraint firstAttribute="height" constant="50" id="Hd5-mR-f24"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="loadNewPhotos:" destination="Rac-Yn-Y2o" eventType="touchUpInside" id="vst-er-fP0"/>
-                                        </connections>
-                                    </button>
+                                        <items>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="qEe-aQ-11g"/>
+                                            <barButtonItem title="Refresh All Photos" id="QMf-OK-xjX">
+                                                <connections>
+                                                    <action selector="deleteOrRefresh:" destination="Rac-Yn-Y2o" id="bMz-zQ-3Ro"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="5yK-8E-Yeh"/>
+                                        </items>
+                                    </toolbar>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="zcJ-n8-FQ1" secondAttribute="bottom" id="5r9-5r-giw"/>
-                                    <constraint firstAttribute="trailing" secondItem="zcJ-n8-FQ1" secondAttribute="trailing" id="9uE-di-32d"/>
+                                    <constraint firstAttribute="trailing" secondItem="Y1J-aL-sFy" secondAttribute="trailing" id="2Y3-gl-c2H"/>
+                                    <constraint firstAttribute="bottom" secondItem="Y1J-aL-sFy" secondAttribute="bottom" id="6Ux-9Z-aud"/>
                                     <constraint firstItem="pib-PP-wJ6" firstAttribute="top" secondItem="hyX-yQ-q5o" secondAttribute="bottom" id="A1C-D2-CVR"/>
-                                    <constraint firstItem="zcJ-n8-FQ1" firstAttribute="top" secondItem="pib-PP-wJ6" secondAttribute="bottom" id="GsF-bG-fJA"/>
                                     <constraint firstItem="pib-PP-wJ6" firstAttribute="leading" secondItem="Jfm-Ks-IjF" secondAttribute="leading" id="LSb-D3-yoa"/>
                                     <constraint firstItem="hyX-yQ-q5o" firstAttribute="leading" secondItem="Jfm-Ks-IjF" secondAttribute="leading" id="RJA-U0-B9y"/>
                                     <constraint firstAttribute="trailing" secondItem="pib-PP-wJ6" secondAttribute="trailing" id="emm-rM-97v"/>
-                                    <constraint firstItem="zcJ-n8-FQ1" firstAttribute="leading" secondItem="Jfm-Ks-IjF" secondAttribute="leading" id="n6N-mQ-fHk"/>
                                     <constraint firstAttribute="trailing" secondItem="hyX-yQ-q5o" secondAttribute="trailing" id="ngJ-B4-yEU"/>
+                                    <constraint firstItem="Y1J-aL-sFy" firstAttribute="leading" secondItem="Jfm-Ks-IjF" secondAttribute="leading" id="rtd-QV-jSv"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -130,6 +134,7 @@
                     </view>
                     <connections>
                         <outlet property="albumCollection" destination="pib-PP-wJ6" id="Lc1-tF-ato"/>
+                        <outlet property="barButtonItem" destination="QMf-OK-xjX" id="Gep-Je-aft"/>
                         <outlet property="mapView" destination="hyX-yQ-q5o" id="FQx-Pm-BkA"/>
                     </connections>
                 </viewController>

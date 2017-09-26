@@ -99,7 +99,7 @@ class albumViewController: UIViewController {
         // Zoom map to the correct region for showing the pin
         self.mapView.centerCoordinate = self.coordinate!
         // Instantiate an MKCoordinateSpanMake to pass into MKCoordinateRegion
-        let coordinateSpan = MKCoordinateSpanMake(80,80)
+        let coordinateSpan = MKCoordinateSpanMake(0.1,0.1)
         // Instantiate an MKCoordinateRegion to pass into setRegion.
         let coordinateRegion = MKCoordinateRegion(center: coordinate!, span: coordinateSpan)
         self.mapView.setRegion(coordinateRegion, animated: true)
@@ -120,6 +120,10 @@ extension albumViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCollectionViewCell", for: indexPath) as! photoCollectionViewCell
+        
+        cell.activityIndicator.startAnimating()
+        cell.activityIndicator.hidesWhenStopped = true
+        
         // The fr should have access to the photo URLs downloaded in loadPhotos()
         let photoToLoad = fetchedResultsController.object(at: indexPath) as! Album
         
@@ -129,6 +133,7 @@ extension albumViewController: UICollectionViewDataSource {
                 
                 DispatchQueue.main.async {
                     cell.photoImageView.image = UIImage(data: imageData as! Data)
+                    cell.activityIndicator.stopAnimating()
                 }
                 
                 // Save the photo's corresponding imageData to Core Data.
@@ -146,6 +151,7 @@ extension albumViewController: UICollectionViewDataSource {
             
             DispatchQueue.main.async {
                 cell.photoImageView.image = UIImage(data: photoToLoad.imageData as! Data)
+                cell.activityIndicator.stopAnimating()
             }
         }
         return cell

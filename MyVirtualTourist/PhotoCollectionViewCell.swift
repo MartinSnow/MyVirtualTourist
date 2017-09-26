@@ -15,4 +15,7 @@ class photoCollectionViewCell: UICollectionViewCell {
     // MARK: Outlets
     
     @IBOutlet weak var photoImageView: UIImageView!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
 }

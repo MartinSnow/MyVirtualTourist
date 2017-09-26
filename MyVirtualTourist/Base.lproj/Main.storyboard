@@ -73,15 +73,21 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XVl-th-Our"/>
+                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="aDb-Fu-pcb"/>
                                                     </subviews>
                                                 </view>
                                                 <constraints>
+                                                    <constraint firstItem="aDb-Fu-pcb" firstAttribute="top" secondItem="6bF-gD-VJW" secondAttribute="topMargin" constant="25" id="1aE-Rt-8s3"/>
                                                     <constraint firstItem="XVl-th-Our" firstAttribute="top" secondItem="6bF-gD-VJW" secondAttribute="top" id="DJB-GD-76U"/>
                                                     <constraint firstItem="XVl-th-Our" firstAttribute="leading" secondItem="6bF-gD-VJW" secondAttribute="leading" id="M9k-7i-Bzd"/>
+                                                    <constraint firstAttribute="bottomMargin" secondItem="aDb-Fu-pcb" secondAttribute="bottom" constant="25" id="MDJ-F3-sHn"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="aDb-Fu-pcb" secondAttribute="trailing" constant="25" id="Oah-nw-0T7"/>
                                                     <constraint firstAttribute="trailing" secondItem="XVl-th-Our" secondAttribute="trailing" id="SAL-Uk-Xda"/>
+                                                    <constraint firstItem="aDb-Fu-pcb" firstAttribute="leading" secondItem="6bF-gD-VJW" secondAttribute="leadingMargin" constant="25" id="bzE-Z1-vyG"/>
                                                     <constraint firstAttribute="bottom" secondItem="XVl-th-Our" secondAttribute="bottom" id="e49-S4-7MG"/>
                                                 </constraints>
                                                 <connections>
+                                                    <outlet property="activityIndicator" destination="aDb-Fu-pcb" id="gf7-iC-U9p"/>
                                                     <outlet property="photoImageView" destination="XVl-th-Our" id="WVk-Ju-gTg"/>
                                                 </connections>
                                             </collectionViewCell>

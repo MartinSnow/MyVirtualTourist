@@ -78,7 +78,7 @@ class GetImageUrls {
                 // Get photos url_m
                 var photosUrl = [String]()
                 photosUrl = self.getPhotosUrl(photoArray: photoArray, key: "url_m")
-                //print("PhotosUrl is \(photosUrl)")
+                print("PhotosUrlNumbers is \(photosUrl.count)")
                 completionHandlerForGetPhotosUrls(true, photosUrl, nil)
             }
         }

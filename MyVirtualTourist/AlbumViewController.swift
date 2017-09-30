@@ -151,7 +151,7 @@ class albumViewController: UIViewController {
                 
                 if success {
                     
-                    let pageNumber = (arc4random_uniform(UInt32(numberOfPages!)))
+                    let pageNumber = (arc4random_uniform(UInt32(100)))
                     print("pageNumber is \(pageNumber)")
                     self.loadPhotos(pageNumber: Int(pageNumber))
                 }

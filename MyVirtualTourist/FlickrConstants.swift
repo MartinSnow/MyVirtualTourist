@@ -39,7 +39,7 @@ struct Constants  {
         static let MediumURL = "url_m"
         static let ResponseFormat = "json"
         static let DisableJSONCallback = "1" /* 1 means "yes" */
-        static let PerPage = "20"
+        static let PerPage = "10"
         //static let AuthValue = "72157689114528375-0e85e9322f97b8e0"
         //static let APISigValue = "54fa50374c1fa0d4fa34097e320fbbde"
         

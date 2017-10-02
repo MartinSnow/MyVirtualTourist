@@ -111,9 +111,10 @@ class albumViewController: UIViewController {
         
         // Delete the photos corresponding to the indexes stored in self.tappedIndexPaths (populated in didSelectItemAt)
         for indexPath in tappedIndexPaths {
-            
+            print("Delete \(indexPath)")
             stack.context.delete(fetchedResultsController.object(at: indexPath as IndexPath) as! Album)
         }
+        self.tappedIndexPaths.removeAll()
         
         do {
             try stack.context.save()
@@ -221,7 +222,7 @@ extension albumViewController: UICollectionViewDelegate {
         
         // Whenever user selects one or more cells, the bar button changes to Remove seleceted pictures
         self.barButtonItem.title = "Remove selected pictures"
-        
+        print("Index is \(indexPath)")
         self.tappedIndexPaths.append(indexPath)
     }
     

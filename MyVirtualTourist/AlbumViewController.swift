@@ -175,6 +175,7 @@ extension albumViewController: UICollectionViewDataSource {
         
         cell.activityIndicator.startAnimating()
         cell.activityIndicator.hidesWhenStopped = true
+        cell.photoImageView.image = nil
         
         // The fr should have access to the photo URLs downloaded in loadPhotos()
         let photoToLoad = fetchedResultsController.object(at: indexPath) as! Album
